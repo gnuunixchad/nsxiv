@@ -1,5 +1,6 @@
 ![nsxiv](https://codeberg.org/nsxiv/pages/raw/branch/master/img/logo.png)
 # my build of of [nsxiv](https://codeberg.org/nsxiv/nsxiv) - Neo Simple X Image Viewer
+![screenshot](./misc/nsxiv.png)
 
 nsxiv is a fork of the now-unmaintained [sxiv](https://github.com/xyb3rt/sxiv)
 with the purpose of being a (mostly) drop-in replacement for sxiv, maintaining its
