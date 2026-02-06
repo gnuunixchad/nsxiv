@@ -1,5 +1,4 @@
-![nsxiv](https://codeberg.org/nsxiv/pages/raw/branch/master/img/logo.png)
-# my build of of [nsxiv](https://codeberg.org/nsxiv/nsxiv) - Neo Simple X Image Viewer
+# <img src="./misc/nsxiv-repo.png" width="24"/> my build of of [nsxiv](https://codeberg.org/nsxiv/nsxiv) - Neo Simple X Image Viewer
 ![screenshot](./misc/nsxiv.png)  
 nsxiv v33
 
