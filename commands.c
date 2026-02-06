@@ -250,6 +250,15 @@ bool cg_change_contrast(arg_t d)
 	return change_color_modifier(d, &img.contrast);
 }
 
+bool cg_toggle_invert(arg_t _)
+{
+	img.invert = !img.invert;
+	img_update_color_modifiers(&img);
+	if (mode == MODE_THUMB)
+		tns.dirty = true;
+	return true;
+}
+
 bool ci_navigate(arg_t n)
 {
 	if (prefix > 0)

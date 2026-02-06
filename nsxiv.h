@@ -195,6 +195,7 @@ struct img {
 	int gamma;
 	int brightness;
 	int contrast;
+	bool invert;
 
 	scalemode_t scalemode;
 	float zoom;
