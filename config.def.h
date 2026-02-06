@@ -13,7 +13,7 @@ static const char *MARK_FG[]  = { "Nsxiv.mark.foreground",      NULL };
 #if HAVE_LIBFONTS
 static const char *BAR_BG[]   = { "Nsxiv.bar.background",       NULL };
 static const char *BAR_FG[]   = { "Nsxiv.bar.foreground",       NULL };
-static const char *BAR_FONT[] = { "Nsxiv.bar.font",            "monospace-8" };
+static const char *BAR_FONT[] = { "Nsxiv.bar.font",            "SourceCodePro-14" };
 
 /* if true, statusbar appears on top of the window */
 static const bool TOP_STATUSBAR = false;
@@ -26,8 +26,10 @@ static const bool TOP_STATUSBAR = false;
  * (first/last value is used as min/max zoom level)
  */
 static const float zoom_levels[] = {
-	 12.5,  25.0,  50.0,  75.0,
-	100.0, 150.0, 200.0, 400.0, 800.0
+	10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0,
+	110.0, 120.0, 130.0, 140.0, 150.0, 160.0, 170.0, 180.0, 190.0,
+	200.0, 250.0, 300.0, 350.0 ,400.0, 450.0, 500.0, 550.0, 600.0,
+	650.0, 700.0, 750.0 ,800.0, 850.0, 900.0, 950.0, 1000.0
 };
 
 /* default slideshow delay (in sec, overwritten via -S option): */
@@ -106,15 +108,15 @@ static const keymap_t keys[] = {
 	/* modifiers    key               function              argument */
 	{ 0,            XK_q,             g_quit,               0 },
 	{ 0,            XK_Q,             g_pick_quit,          0 },
-	{ ControlMask,  XK_N,             g_nav_dir,            +1 },
-	{ ControlMask,  XK_P,             g_nav_dir,            -1 },
+	{ ControlMask,  XK_n,             g_nav_dir,            +1 },
+	{ ControlMask,  XK_p,             g_nav_dir,            -1 },
 	{ 0,            XK_Return,        g_switch_mode,        None },
 	{ 0,            XK_f,             g_toggle_fullscreen,  None },
 	{ 0,            XK_b,             g_toggle_bar,         None },
 	{ ControlMask,  XK_x,             g_prefix_external,    None },
 	{ 0,            XK_g,             g_first,              None },
 	{ 0,            XK_G,             g_n_or_last,          None },
-	{ 0,            XK_r,             g_reload_image,       None },
+	{ ControlMask,  XK_r,             g_reload_image,       None },
 	{ 0,            XK_D,             g_remove_image,       None },
 	{ 0,            XK_slash,         g_dmenu_search,       None },
 	{ ControlMask,  XK_h,             g_scroll_screen,      DIR_LEFT },
@@ -125,10 +127,8 @@ static const keymap_t keys[] = {
 	{ ControlMask,  XK_Up,            g_scroll_screen,      DIR_UP },
 	{ ControlMask,  XK_l,             g_scroll_screen,      DIR_RIGHT },
 	{ ControlMask,  XK_Right,         g_scroll_screen,      DIR_RIGHT },
-	{ 0,            XK_plus,          g_zoom,               +1 },
-	{ 0,            XK_KP_Add,        g_zoom,               +1 },
-	{ 0,            XK_minus,         g_zoom,               -1 },
-	{ 0,            XK_KP_Subtract,   g_zoom,               -1 },
+	{ 0,            XK_i,             g_zoom,               +1 },
+	{ 0,            XK_o,	          g_zoom,               -1 },
 	{ 0,            XK_m,             g_toggle_image_mark,  None },
 	{ 0,            XK_M,             g_mark_range,         None },
 	{ ControlMask,  XK_m,             g_reverse_marks,      None },
@@ -142,7 +142,7 @@ static const keymap_t keys[] = {
 	{ ControlMask,  XK_bracketleft,   g_change_brightness,  -1 },
 	{ 0,            XK_parenleft,     g_change_contrast,    -1 },
 	{ 0,            XK_parenright,    g_change_contrast,    +1 },
-	{ 0,            XK_i,             g_toggle_invert,      None },
+	{ 0,            XK_I,             g_toggle_invert,      None },
 
 	{ 0,            XK_h,             t_move_sel,           DIR_LEFT },
 	{ 0,            XK_Left,          t_move_sel,           DIR_LEFT },
@@ -156,17 +156,15 @@ static const keymap_t keys[] = {
 
 	{ 0,            XK_n,             i_navigate,           +1 },
 	{ 0,            XK_n,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
-	{ 0,            XK_space,         i_navigate,           +1 },
 	{ 0,            XK_p,             i_navigate,           -1 },
 	{ 0,            XK_p,             i_scroll_to_edge,     DIR_LEFT | DIR_UP },
 	{ 0,            XK_BackSpace,     i_navigate,           -1 },
 	{ 0,            XK_bracketright,  i_navigate,           +10 },
 	{ 0,            XK_bracketleft,   i_navigate,           -10 },
-	{ ControlMask,  XK_6,             i_alternate,          None },
-	{ ControlMask,  XK_n,             i_navigate_frame,     +1 },
-	{ ControlMask,  XK_p,             i_navigate_frame,     -1 },
-	{ ControlMask,  XK_space,         i_toggle_animation,   None },
-	{ ControlMask,  XK_a,             i_toggle_animation,   None },
+	{ ControlMask,  XK_a,             i_alternate,          None },
+	{ 0,		XK_comma,         i_navigate_frame,     +1 },
+	{ 0,  		XK_period,        i_navigate_frame,     -1 },
+	{ 0,  		XK_space,         i_toggle_animation,   None },
 	{ 0,            XK_h,             i_scroll,             DIR_LEFT },
 	{ 0,            XK_Left,          i_scroll,             DIR_LEFT },
 	{ 0,            XK_j,             i_scroll,             DIR_DOWN },
@@ -186,11 +184,10 @@ static const keymap_t keys[] = {
 	{ 0,            XK_F,             i_fit_to_win,         SCALE_FILL },
 	{ 0,            XK_e,             i_fit_to_win,         SCALE_WIDTH },
 	{ 0,            XK_E,             i_fit_to_win,         SCALE_HEIGHT },
-	{ 0,            XK_less,          i_rotate,             DEGREE_270 },
-	{ 0,            XK_greater,       i_rotate,             DEGREE_90 },
-	{ 0,            XK_question,      i_rotate,             DEGREE_180 },
-	{ 0,            XK_bar,           i_flip,               FLIP_HORIZONTAL },
-	{ 0,            XK_underscore,    i_flip,               FLIP_VERTICAL },
+	{ 0,            XK_R,	          i_rotate,             DEGREE_270 },
+	{ 0,            XK_r,	          i_rotate,             DEGREE_90 },
+	{ 0,            XK_V,	          i_flip,               FLIP_HORIZONTAL },
+	{ 0,            XK_v,		  i_flip,               FLIP_VERTICAL },
 	{ 0,            XK_a,             i_toggle_antialias,   None },
 	{ 0,            XK_A,             i_toggle_alpha,       None },
 	{ 0,            XK_s,             i_slideshow,          None },
