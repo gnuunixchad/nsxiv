@@ -11,3 +11,9 @@ under GPL-2.0-or-later and aims to be easy to modify and customize.
 1. [color-invert](https://codeberg.org/nsxiv/nsxiv-extra/src/branch/master/patches/color-invert)
 2. [dmenu-search](https://codeberg.org/nsxiv/nsxiv-extra/src/branch/master/patches/dmenu-search)
 3. [nav-dir](https://codeberg.org/nsxiv/nsxiv-extra/src/branch/master/patches/nav-dir)
+
+### scripting
+Below are some of my scripts utilizing nsxiv:
+- [key-handler](https://codeberg.org/unixchad/dotfiles/src/branch/master/.config/nsxiv/exec/key-handler)
+- [url-rifle](https://codeberg.org/unixchad/dotfiles/src/branch/master/.local/bin/url-rifle)
+- [qute-code](https://codeberg.org/unixchad/dotfiles/src/branch/master/.local/bin/qutebrowser/qute-code)
