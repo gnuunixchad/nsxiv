@@ -17,3 +17,6 @@ Below are some of my scripts utilizing nsxiv:
 - [key-handler](https://codeberg.org/unixchad/dotfiles/src/branch/master/.config/nsxiv/exec/key-handler)
 - [url-rifle](https://codeberg.org/unixchad/dotfiles/src/branch/master/.local/bin/url-rifle)
 - [qute-code](https://codeberg.org/unixchad/dotfiles/src/branch/master/.local/bin/qutebrowser/qute-code)
+
+### Wayland
+Swayimg is the most close-to-nsxiv(in functionality) Wayland-native image viewer. Here are my swayimg [config](https://codeberg.org/unixchad/dotfiles/src/branch/master/.config/swayimg) and external [scripts](https://codeberg.org/unixchad/dotfiles/src/branch/master/.local/bin/swayimg).
