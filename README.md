@@ -11,6 +11,7 @@ under GPL-2.0-or-later and aims to be easy to modify and customize.
 1. [color-invert](https://codeberg.org/nsxiv/nsxiv-extra/src/branch/master/patches/color-invert)
 2. [dmenu-search](https://codeberg.org/nsxiv/nsxiv-extra/src/branch/master/patches/dmenu-search)
 3. [nav-dir](https://codeberg.org/nsxiv/nsxiv-extra/src/branch/master/patches/nav-dir)
+4. [zoom-per-image](./patches/zoom-per-image-v33.diff)
 
 ### scripting
 Below are some of my scripts utilizing nsxiv:

@@ -1,0 +1,74 @@
+commit 92e89c84996ce33e7618b816e15931c210f446db
+Author: nate zhou <gnuunixchad@outlook.com>
+Date:   Mon Feb 9 10:59:18 2026 +0800
+
+    Patch: zoom-per-image
+    
+    zoom-per-image-v31.diff (involving manual merge)
+
+diff --git a/image.c b/image.c
+index 2a16cbd..68d8a04 100644
+--- a/image.c
++++ b/image.c
+@@ -393,8 +393,10 @@ static bool img_fit(img_t *img)
+ {
+ 	float z, zw, zh;
+ 
+-	if (img->scalemode == SCALE_ZOOM)
+-		return false;
++	if (img->scalemode == SCALE_ZOOM && files[fileidx].zoom != 0) {
++		img_zoom_to(img, files[fileidx].zoom);
++		return true;
++	}
+ 
+ 	zw = (float)img->win->w / (float)img->w;
+ 	zh = (float)img->win->h / (float)img->h;
+@@ -416,7 +418,7 @@ static bool img_fit(img_t *img)
+ 	z = MIN(z, img->scalemode == SCALE_DOWN ? 1.0 : ZOOM_MAX);
+ 
+ 	if (ABS(img->zoom - z) > 1.0 / MAX(img->w, img->h)) {
+-		img->zoom = z;
++		files[fileidx].zoom = img->zoom = z;
+ 		img->dirty = true;
+ 		return true;
+ 	} else {
+@@ -562,12 +564,15 @@ bool img_zoom_to(img_t *img, float z)
+ bool img_zoom(img_t *img, int d)
+ {
+ 	int i = d > 0 ? 0 : (int)ARRLEN(zoom_levels) - 1;
++	if(files[fileidx].zoom)
++		img->zoom = files[fileidx].zoom;
+ 	while (i >= 0 && i < (int)ARRLEN(zoom_levels) &&
+ 	       (d > 0 ? zoom_levels[i] / 100 <= img->zoom : zoom_levels[i] / 100 >= img->zoom))
+ 	{
+ 		i += d;
+ 	}
+ 	i = MIN(MAX(i, 0), (int)ARRLEN(zoom_levels) - 1);
++	files[fileidx].zoom = zoom_levels[i]/100;
+ 	return img_zoom_to(img, zoom_levels[i] / 100);
+ }
+ 
+diff --git a/main.c b/main.c
+index 65c060c..a4f3840 100644
+--- a/main.c
++++ b/main.c
+@@ -140,6 +140,7 @@ static void check_add_file(const char *filename, bool given)
+ 
+ 	files[fileidx].name = estrdup(filename);
+ 	files[fileidx].path = NULL;
++	files[fileidx].zoom = 0;
+ 	if (given)
+ 		files[fileidx].flags |= FF_WARN;
+ 	fileidx++;
+diff --git a/nsxiv.h b/nsxiv.h
+index e0de301..e01d13d 100644
+--- a/nsxiv.h
++++ b/nsxiv.h
+@@ -108,6 +108,7 @@ typedef struct {
+ 	const char *name; /* as given by user */
+ 	const char *path; /* lazily resolved absolute path, generally should be accessed via file_realpath() */
+ 	fileflags_t flags;
++	float zoom;
+ } fileinfo_t;
+ 
+ const char *file_realpath(const fileinfo_t*);
