@@ -140,6 +140,7 @@ static void check_add_file(const char *filename, bool given)
 
 	files[fileidx].name = estrdup(filename);
 	files[fileidx].path = NULL;
+	files[fileidx].zoom = 0;
 	if (given)
 		files[fileidx].flags |= FF_WARN;
 	fileidx++;

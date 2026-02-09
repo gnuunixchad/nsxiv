@@ -394,8 +394,10 @@ static bool img_fit(img_t *img)
 {
 	float z, zw, zh;
 
-	if (img->scalemode == SCALE_ZOOM)
-		return false;
+	if (img->scalemode == SCALE_ZOOM && files[fileidx].zoom != 0) {
+		img_zoom_to(img, files[fileidx].zoom);
+		return true;
+	}
 
 	zw = (float)img->win->w / (float)img->w;
 	zh = (float)img->win->h / (float)img->h;
@@ -417,7 +419,7 @@ static bool img_fit(img_t *img)
 	z = MIN(z, img->scalemode == SCALE_DOWN ? 1.0 : ZOOM_MAX);
 
 	if (ABS(img->zoom - z) > 1.0 / MAX(img->w, img->h)) {
-		img->zoom = z;
+		files[fileidx].zoom = img->zoom = z;
 		img->dirty = true;
 		return true;
 	} else {
@@ -563,12 +565,15 @@ bool img_zoom_to(img_t *img, float z)
 bool img_zoom(img_t *img, int d)
 {
 	int i = d > 0 ? 0 : (int)ARRLEN(zoom_levels) - 1;
+	if(files[fileidx].zoom)
+		img->zoom = files[fileidx].zoom;
 	while (i >= 0 && i < (int)ARRLEN(zoom_levels) &&
 	       (d > 0 ? zoom_levels[i] / 100 <= img->zoom : zoom_levels[i] / 100 >= img->zoom))
 	{
 		i += d;
 	}
 	i = MIN(MAX(i, 0), (int)ARRLEN(zoom_levels) - 1);
+	files[fileidx].zoom = zoom_levels[i]/100;
 	return img_zoom_to(img, zoom_levels[i] / 100);
 }
 
